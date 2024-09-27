@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
-public class Array01 {
+public class Array_01 {
     public static void main(String[] args) {
         int[] arr = {4, 1, 3, 7, 6, 6, 3, 4, 1, 7, 7};
 //        for (int i = 0; i <= 10; i++) {  // 배열 전체 읽기
