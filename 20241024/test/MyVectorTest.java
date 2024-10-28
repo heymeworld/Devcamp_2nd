@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MyVectorTest {
@@ -54,18 +52,59 @@ public class MyVectorTest {
         assertNotNull(v1.get(1));
         System.out.println("해당 인덱스는 " + v1.get(1) + " 상태 입니다.");
 
-         Optional<MyVector> opt = v1.get(1);
+         // Optional<MyVector> opt = v1.get(1);
          // isPresent() : Optional 객체가 값을 가지고 있다면 true, 값이 없다면 false 리턴
-         assertFalse(opt.isPresent());  // opt 대신 v1.get(1) 써도 됨
-         // message : true 이면 출력X, false 면 메세지 출력됨 (AssertionFailedError: 해당 index에는 객체가 없습니다. ==>)
-         //assertTrue(opt.isPresent(), "해당 index에는 객체가 없습니다.");
+         // assertFalse(opt.isPresent());  // opt 대신 v1.get(1) 써도 됨
+         // message : true 이면 출력X, false 면 메세지 출력됨 (AssertionFailedError: 해당 index 에는 객체가 없습니다. ==>)
+         //assertTrue(opt.isPresent(), "해당 index 에는 객체가 없습니다.");
     }
 
-//    @Test
-//    public void Test2_6() {
-//        MyVector v = new MyVector();
-//        v.add();
-//    }
+    // toString() Test
+    @Test
+    public void Test2_6() {
+        MyVector v = new MyVector();
+        v.add(new MyVector());
+        v.add(new MyVector(17));
+        v.add(new MyVector(18));
+        assertEquals(3, v.size());
+        System.out.println(v);
+    }
 
+    // indexOf() Test
+    @Test
+    public void Test2_7() {
+        MyVector v = new MyVector();
+        v.add(new MyVector());
+        v.add(new MyVector(17));
+        v.add(new MyVector(18));
+
+        //v.indexOf(v.get(1));  // 내용물이 같아도 Optional 을 쓸 때마다, 주소가 바뀌어서 절대 (==) 조건이 성립할 수 없다
+
+        // Optional.get() : Optional 에서 값을 꺼낼 때
+        assertEquals(0, v.indexOf(v.get(0).get()));
+        assertEquals(2, v.indexOf(v.get(2).get()));
+        assertEquals(1, v.indexOf(v.get(1).get()));
+
+        // .orElse(null) : Optional 이 비어 있는 경우 null을 반환하여 안전하게 비교하도록 합니다.
+        assertEquals(-1, v.indexOf(v.get(3).orElse(null)));
+    }
+
+    // remove() Test
+    @Test
+    public void Test2_8() {
+        MyVector v = new MyVector();
+        v.add(new MyVector());
+        v.add(new MyVector(17));
+        v.add(new MyVector(18));
+        System.out.println("현재 " + v.size() + " 개의 요소가 있습니다.");
+        System.out.println();
+
+        assertTrue(v.remove(v.get(2).get()));
+        System.out.println("현재 " + v.size() + " 개의 요소가 있습니다.");
+        // isPresent() : Optional 객체가 값을 가지고 있다면 true, 값이 없다면 false 리턴
+        assertFalse(v.get(2).isPresent());
+
+        assertFalse(v.remove(v.get(3).orElse(null)));
+    }
 
 } // class 끝.
