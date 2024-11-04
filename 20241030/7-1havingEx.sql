@@ -2,13 +2,14 @@
 단, 급여총합이 8000(만원) 이상(sum >= 8000)인 직책만 나타내며, 
 급여 총합에 대한 오름차순(order by asc)으로 정렬하시오. */
 
-select title, sum(salary) as 급여총합 from s_emp
-where title not like '%부장'
-group by title
-having sum(salary) >= 8000
-order by sum(salary) desc;
+SELECT TITLE, SUM(SALARY) 급여총합
+FROM S_EMP
+WHERE TITLE NOT LIKE '%부장'
+GROUP BY TITLE
+HAVING SUM(SALARY)>= 8000
+ORDER BY SUM(SALARY) ASC;
 
 --질의결과
 --TITLE, 급여총합
---과장	11500
---사원	8090
+-- 사원	8090
+-- 과장	11500

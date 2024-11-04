@@ -1,31 +1,34 @@
 /* S_EMP 테이블에서 이름은 홍길동, 급여는 2000, 나머지는 NULL을 입력하되,(INSERT)
-사번은 SEQUENCE 값(SEQUENCE.NEXTVAL, SEQUENCE.CURRVAL)을 이용하시오. */
+사번(ID)은 SEQUENCE 값(SEQUENCE.NEXTVAL, SEQUENCE.CURRVAL)을 이용하시오. */
 -- 1. 시퀀스 생성 -> 2. 시퀀스 사용
 
---CREATE SEQUENCE S_EMP_ID
---        INCREMENT BY 1
---        START WITH 1
---        MAXVALUE 20
---        NOCYCLE
---        NOCACHE
+CREATE SEQUENCE S_EMP_ID
+       INCREMENT BY 1
+       START WITH 1
+       MAXVALUE 20
+       NOCYCLE
+       NOCACHE;
 
---SELECT * FROM ALL_SEQUENCES
---WHERE SEQUENCE_NAME = 'S_EMP_ID';
+SELECT * FROM ALL_SEQUENCES  --> 테이블명이 기억나지 않을 땐, SEQU..정도까지 치면 자동으로 일치하는 목록 보여준다
+WHERE SEQUENCE_NAME = 'S_EMP_ID';
 
 --질의결과
 --C##STUDENT	S_EMP_ID	1	20	1	N	N	0	1	N	N	N	N	N
 
---DROP SEQUENCE S_EMP_ID
---CREATE SEQUENCE S_EMP_ID
---        INCREMENT BY 1
---        START WITH 26
---        MAXVALUE 46
---        NOCYCLE
---        NOCACHE
+SELECT * FROM S_EMP;    --> LAST_ID 26;
+
+DROP SEQUENCE S_EMP_ID  --> START WITH 는 ALTER 로 변경 불가해서, DROP 하고 다시 만듦
+
+CREATE SEQUENCE S_EMP_ID
+       INCREMENT BY 1
+       START WITH 26
+       MAXVALUE 46
+       NOCYCLE
+       NOCACHE;
 
 INSERT INTO S_EMP (ID, NAME, SALARY)
-            VALUES (S_EMP_ID.NEXTVAL, '홍길동', 2000);
-            
+VALUES (S_EMP_ID.NEXTVAL, '홍길동', 2000);
+
 SELECT * FROM S_EMP
 WHERE NAME = '홍길동';
 

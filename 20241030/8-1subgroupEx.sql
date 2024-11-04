@@ -1,8 +1,9 @@
 /* 각 부서(dept_id)내에서 각 직책(title)별로 몇 명의 인원(count(*))이 있는지를 나타내시오. */
 
-SELECT dept_id, title, count(*) 인원 FROM s_emp
-group by dept_id, title
-order by dept_id;
+SELECT DEPT_ID, TITLE, COUNT(TITLE) 인원수
+FROM S_EMP
+GROUP BY DEPT_ID, TITLE
+ORDER BY DEPT_ID;
 
 --질의결과
 --dept_id, title, 인원
