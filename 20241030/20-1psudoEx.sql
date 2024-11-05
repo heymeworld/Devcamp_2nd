@@ -11,6 +11,7 @@ FROM (SELECT * FROM S_EMP
        ORDER BY ID)
 WHERE ROWNUM <= 5;
 
+--질의결과
 --NAME, ROWNUM
 --박구곤	1
 --손명성	2

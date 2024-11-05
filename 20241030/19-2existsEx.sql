@@ -14,6 +14,12 @@ WHERE EXISTS (SELECT ID
               FROM S_EMP
               WHERE MANAGER_ID = OUTER.ID);
               
+--질의결과
+--사번, 이름, 직책, 부서번호
+--1	박구곤	사장	118
+--2	손명성	기획부장	110
+--15	신종필	영업대표이사	106
+
 SELECT A.ID
 FROM S_EMP A, S_EMP B
 WHERE B.MANAGER_ID = A.ID;
