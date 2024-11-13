@@ -11,7 +11,7 @@ ORDER BY DEPT_ID DESC, SALARY;
 
 -- 4. 직원 테이블에서 2015년도 이전에 입사한 직원의 수를 출력하시오.
 SELECT * FROM S_EMP
-WHERE START_DATE < '15/01/01';
+WHERE START_DATE < TO_CHAR('15/01/01');
 
 -- 5. 연봉이 1000 이상 5000 이하인 직원을 모두 출력하시오.
 SELECT * FROM S_EMP
@@ -29,7 +29,7 @@ WHERE TITLE = '사원'
 GROUP BY DEPT_ID;
 
 -- 8. 각 지역(REGION_ID)별로 몇 개의 부서가 있는지를 나타내시오.
-SELECT REGION_ID, COUNT(NAME)
+SELECT REGION_ID, COUNT(*)
 FROM S_DEPT
 GROUP BY REGION_ID;
 
@@ -59,7 +59,7 @@ SELECT *
 FROM S_EMP
 ORDER BY DEPT_ID, TITLE;
 
-SELECT DEPT_ID, TITLE, COUNT(TITLE)
+SELECT DEPT_ID, TITLE, COUNT(*)
 FROM S_EMP
 GROUP BY DEPT_ID, TITLE
 ORDER BY DEPT_ID;
@@ -75,6 +75,11 @@ SELECT DEPT_ID, MIN(SALARY), MAX(SALARY)
 FROM S_EMP
 GROUP BY DEPT_ID
 HAVING MIN(SALARY) != MAX(SALARY);
+
+SELECT DEPT_ID, MIN(SALARY), MAX(SALARY)
+FROM S_EMP
+GROUP BY DEPT_ID
+HAVING MIN(SALARY) <> MAX(SALARY);
 
 /* 15. 직원(S_EMP) 테이블과 부서(S_DEPT) 테이블을 JOIN하여,
 사원의 이름과 부서번호, 부서명을 나타내시오. */
@@ -99,12 +104,13 @@ WHERE SALARY BETWEEN G.LOSAL AND G.HISAL;
 사원의 이름과 사번, 그리고 각 사원의 담당 고객 이름을 나타내시오.
 단, 고객에 대하여 담당 영업사원이 없더라도 모든 고객의 이름을 나타내고, --> 사원쪽 데이터가 부족하더라도 또는, 고객 데이터를 기준으로!
 사번 순으로 오름차순 정렬하시오. */
+-- outer join 시, on 으로 조건을 적용시켜야 원하는 결과를 얻을 수 있다.
 SELECT E.ID, E.NAME, C.NAME
 FROM S_EMP E RIGHT OUTER JOIN S_CUSTOMER C
 ON E.ID = C.SALES_REP_ID
 ORDER BY E.ID;
 
-/* 19. 직원 중에 '김정미'와 같은 직책(TITLE)을 가지는
+/* 19. 직원 중에 '김정미'와 같은 직책(TITLE)을 가지는 (김정미만 나오는 테이블)
 사원의 이름과 직책, 급여, 부서번호를 나타내시오. (SELF JOIN을 사용할 것) */
 SELECT A.NAME, A.TITLE, A.DEPT_ID, A.SALARY
 FROM S_EMP A JOIN S_EMP B
@@ -131,13 +137,16 @@ SELECT NAME, SALARY, DECODE(TRUNC(SALARY/1000), 0, 'E',
 FROM S_EMP;
 
 -- 22. 자신의 급여가 자신이 속한 부서의 평균 급여보다 적은 직원에 대해 이름, 급여, 부서번호를 출력하시오.
+
 SELECT NAME, DEPT_ID, SALARY
 FROM S_EMP OUTER
 WHERE SALARY < (SELECT AVG(SALARY)
                 FROM S_EMP
-                WHERE DEPT_ID = OUTER.DEPT_ID
-                GROUP BY DEPT_ID)
+                WHERE DEPT_ID = OUTER.DEPT_ID)
 ORDER BY DEPT_ID;
+--> 이렇게 단일행과 다중행을 비교하고 싶다면, 행을 다중 -> 단일로 만들 순 없으니까
+--> 단일행과 다중행을 1:1로 대응할 수 있는 조건을 걸어주면 된다(그룹화와 비슷)
+--> 심지어 위 서브쿼리는 GROUP BY 를 안 썼다. 조건절로 대신 그룹화를 하면서 매칭시켜줬다고 보면 된다
 
 /* 23. 본인의 급여가 각 부서별 평균 급여 중 어느 한 부서의 평균급여보다 적은 급여를 받는 직원에 대해
 이름, 급여, 부서번호를 출력하시오.(ANY를 사용할 것) */
