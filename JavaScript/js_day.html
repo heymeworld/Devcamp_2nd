@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main {
+            background-color: yellow;
+            width : 300px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main" >
+        <button id="okBtn">OK</button>
+        <!-- <a href="https://www.google.com">google</a> -->
+        <a href="www.google.com" onclick="return false">google</a>
+        <form action="https://www.google.com" onsubmit="return formCheck(this)">
+        <!-- <form action="https://www.google.com" onsubmit="return false"> -->
+            <input type="text" name="keyword">
+            <input type="submit" value="전송">
+        </form>
+    </div>
+    <script>
+    function formCheck(frm) {
+        // if(document.forms[0][0].value=='') {
+        if(frm[0].value=='') {
+            alert("keyword를 입력하지 않으셨습니다.")    
+            return false;
+        }
+        return true;
+    }
+    // 브라우져(window)에 Document가 로딩이 끝나면 발생하는 이벤트 - main
+    window.onload = function() {}
+
+        // 1. 참조 얻어오기
+        var btn = document.getElementById("okBtn")
+
+        // 2.이벤트 연결
+        // btn.onclick = ok -> ok()는 안 됨
+        btn.onclick = function(e) {
+            alert("OK")
+            console.dir(e)
+        }
+
+        function ok() {
+            alert("OK")
+        }
+
+    </script>
+</body>
+</html>

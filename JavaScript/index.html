@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul>li>a {
+            color: gray;
+            text-decoration: none;
+        }
+
+        ul>li>a:hover {
+            color: white;
+        }
+
+        ul>li {
+            color: gray;
+            list-style: none;
+            display: inline-block;
+            padding-top: 10px;
+            padding-left: 50px;
+        }
+
+        #content {
+            margin: auto;
+        }
+        #top {
+            width: 80%;
+            height: 50px;
+            background-color: black;
+        }
+
+        #main {
+            width: 80%;
+            height: 500px;
+            background-color: yellow;
+        }
+
+        #footer {
+            width: 80%;
+            height: 100px;
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div id="top"></div>
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">Board</a></li>
+            <li><a href="">Book</a></li>
+            <li><a href="">Lecture</a></li>
+            <li><a href="">Help</a></li>
+            <li><a href="http://localhost:8080/ch2/login">Login</a></li>
+            <li><a href="http://localhost:8080/ch2/logout">Logout</a></li>
+        </ul>
+        <div id="main"></div>
+        <div id="footer"></div>
+    </div>
+</body>
+</html>
