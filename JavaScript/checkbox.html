@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <input type="checkbox" id="All" onclick="return selectAll()"> 전체 </br> -->
+    <input type="checkbox" id="All"> 전체 </br>
+    <input type="checkbox" value="야구"> 야구 </br>
+    <input type="checkbox" value="축구"> 축구 </br>
+    <input type="checkbox" value="농구"> 농구 </br>
+    <input type="checkbox" value="배구"> 배구 </br>
+    <textarea name="" id="result"></textarea>
+    <script>
+        // main 메서드 - 문서(Document)가 브라우저(window)에 로딩이 끝났을 때 발생하는 onload 이벤트
+        window.onload = function() {
+            // 1. 참조
+            var all = document.getElementsByTagName("input")
+            var txt = document.getElementsByTagName("textarea")
+
+            // 2.이벤트 등록
+            all[0].onclick = function() { 
+                if(all[0].checked===true) {
+                    // click 이벤트 발생 시 현재 상태의 반대값을 입력
+                    for(let i=1; i<all.length;i++) {
+                        all[i].checked=true
+                        each(i)
+                        // txt[0].innerHTML+=all[i].defaultValue
+                    }
+                }
+                else {
+                    for(let i=1; i<all.length;i++) {
+                        all[i].checked=false
+                        txt[0].innerHTML=''
+                    }  
+                }
+            }
+            
+            // 개별 요소 클릭하면, cheched===true일 시 textarea에 defaultValue 추가
+            all[1].onclick = function() { if(all[1].checked === true) { txt[0].innerHTML+=all[1].defaultValue } 
+                            else { txt[0].innerHTML=txt[0].innerHTML.replace(all[1].defaultValue,'') }
+                            }
+            all[2].onclick = function() { if(all[2].checked === true) { txt[0].innerHTML+=all[2].defaultValue } 
+                            else { txt[0].innerHTML=txt[0].innerHTML.replace(all[2].defaultValue,'') }
+                            }
+            all[3].onclick = function() { if(all[3].checked === true) { txt[0].innerHTML+=all[3].defaultValue } 
+                            else { txt[0].innerHTML=txt[0].innerHTML.replace(all[3].defaultValue,'') }
+                            }
+            all[4].onclick = function() { if(all[4].checked === true) { txt[0].innerHTML+=all[4].defaultValue } 
+                            else { txt[0].innerHTML=txt[0].innerHTML.replace(all[4].defaultValue,'') }
+                            }
+                
+            function each(n) {
+                if(all[n].checked === true) { txt[0].innerHTML+=all[n].defaultValue } 
+                else { txt[0].innerHTML=txt[0].innerHTML.replace(all[n].defaultValue,'') }
+            }
+            
+        }
+            
+            // 클릭할 때마 체크된 항목의 글자를 result(<textarea>)에 보여줄 것
+        
+    </script>
+</body>
+</html>
